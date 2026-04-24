@@ -118,6 +118,8 @@ Frontend Dashboard (React)
 ```
 ---
 ## Frontend Folder Structure
+
+```text
 client/
 │
 ├── public/                         # Static files
