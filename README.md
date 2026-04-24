@@ -115,3 +115,91 @@ Database (MongoDB)
 AI Engine (Insights & Suggestions)
         ↓
 Frontend Dashboard (React)
+```
+---
+## Frontend Folder Structure
+client/
+│
+├── public/                         # Static files
+│   ├── favicon.ico
+│   └── index.html
+│
+├── src/
+│   ├── assets/                     # All static assets
+│   │   ├── images/
+│   │   ├── icons/
+│   │   └── illustrations/          # SVGs (your onboarding style)
+│   │
+│   ├── components/                 # Reusable components
+│   │   ├── common/                 # Buttons, Inputs, Cards
+│   │   ├── layout/                 # Navbar, Sidebar, Footer
+│   │   ├── charts/                 # Graphs (Pie, Bar)
+│   │   └── ui/                     # Modals, Dropdowns
+│   │
+│   ├── pages/                      # Page-level components
+│   │   ├── Auth/
+│   │   │   ├── Login.jsx
+│   │   │   └── Signup.jsx
+│   │   │
+│   │   ├── Dashboard/
+│   │   │   └── Dashboard.jsx
+│   │   │
+│   │   ├── Expenses/
+│   │   │   └── Expenses.jsx
+│   │   │
+│   │   ├── AI/
+│   │   │   └── Assistant.jsx
+│   │   │
+│   │   ├── Budget/
+│   │   │   └── Budget.jsx
+│   │   │
+│   │   ├── Subscription/
+│   │   │   └── Subscription.jsx
+│   │   │
+│   │   ├── CreditCard/
+│   │   │   └── CreditCard.jsx
+│   │   │
+│   │   ├── AddExpense/
+│   │   │   └── AddExpense.jsx
+│   │   │
+│   │   ├── ReceiptScanner/
+│   │   │   └── ReceiptScanner.jsx
+│   │   │
+│   │   └── Settings/
+│   │       └── Settings.jsx
+│   │
+│   ├── routes/                     # App routing
+│   │   └── AppRoutes.jsx
+│   │
+│   ├── services/                   # API calls
+│   │   ├── api.js                  # Axios config
+│   │   ├── authService.js
+│   │   ├── expenseService.js
+│   │   ├── budgetService.js
+│   │   ├── subscriptionService.js
+│   │   ├── creditService.js
+│   │   └── aiService.js
+│   │
+│   ├── context/                    # Global state
+│   │   ├── AuthContext.js
+│   │   └── ExpenseContext.js
+│   │
+│   ├── hooks/                      # Custom hooks
+│   │   ├── useAuth.js
+│   │   └── useExpenses.js
+│   │
+│   ├── utils/                      # Helper functions
+│   │   ├── formatCurrency.js
+│   │   ├── categoryMapper.js
+│   │   ├── dateUtils.js
+│   │   └── constants.js
+│   │
+│   ├── styles/                     # Global styles
+│   │   └── index.css
+│   │
+│   ├── App.jsx
+│   └── main.jsx
+│
+├── .env
+├── package.json
+└── vite.config.js / next.config.js
