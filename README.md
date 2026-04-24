@@ -205,3 +205,66 @@ client/
 ├── .env
 ├── package.json
 └── vite.config.js / next.config.js
+```
+---
+## Backend Folder Structure
+
+```text
+server/
+│
+├── src/
+│   ├── config/                     # Configuration
+│   │   ├── db.js
+│   │   └── env.js
+│   │
+│   ├── controllers/                # Request handlers
+│   │   ├── auth.controller.js
+│   │   ├── expense.controller.js
+│   │   ├── budget.controller.js
+│   │   ├── subscription.controller.js
+│   │   ├── credit.controller.js
+│   │   └── ai.controller.js
+│   │
+│   ├── routes/                     # API routes
+│   │   ├── auth.routes.js
+│   │   ├── expense.routes.js
+│   │   ├── budget.routes.js
+│   │   ├── subscription.routes.js
+│   │   ├── credit.routes.js
+│   │   └── ai.routes.js
+│   │
+│   ├── models/                     # MongoDB schemas
+│   │   ├── User.js
+│   │   ├── Expense.js
+│   │   ├── Budget.js
+│   │   ├── Subscription.js
+│   │   └── CreditCard.js
+│   │
+│   ├── services/                   # Core logic
+│   │   ├── smsParser.service.js
+│   │   ├── categorization.service.js
+│   │   ├── ai.service.js
+│   │   ├── ocr.service.js
+│   │   └── credit.service.js
+│   │
+│   ├── middlewares/                # Middleware
+│   │   ├── auth.middleware.js
+│   │   ├── error.middleware.js
+│   │   └── validator.middleware.js
+│   │
+│   ├── utils/                      # Utilities
+│   │   ├── regexPatterns.js        # SMS parsing rules
+│   │   ├── logger.js
+│   │   └── helpers.js
+│   │
+│   ├── jobs/                       # Background tasks
+│   │   ├── subscriptionReminder.job.js
+│   │   ├── alert.job.js
+│   │   └── cron.js
+│   │
+│   ├── app.js                      # Express app setup
+│   └── server.js                   # Entry point
+│
+├── .env
+├── package.json
+└── README.md
