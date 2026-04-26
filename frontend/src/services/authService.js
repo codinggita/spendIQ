@@ -1,5 +1,3 @@
-import api from './api';
-
 // For now, we mock the backend using localStorage since the actual backend is not set up yet.
 const MOCK_USERS_KEY = 'mock_users';
 

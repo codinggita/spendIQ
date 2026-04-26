@@ -2,7 +2,7 @@ import { lazy, Suspense } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import ProtectedRoute from './ProtectedRoute';
 import Layout from '../layouts/Layout';
-import Loader from '../components/Loader';
+import Loader from '../components/common/Loader';
 
 // Lazy load pages for performance
 const Login = lazy(() => import('../pages/Login'));
