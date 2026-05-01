@@ -29,21 +29,25 @@ const AddExpense = () => {
     }),
     onSubmit: async (values, { setSubmitting }) => {
       try {
-        await addExpenseApi({
+        const result = await addExpenseApi({
           amount: values.amount,
           notes: values.notes,
           category: values.category,
-          source: 'Manual',
+          paymentMethod: values.paymentMethod,
           date: values.date,
         });
-        dispatch(addExpense({ ...values, id: Date.now().toString() }));
+        
+        // Use the real expense returned by the backend
+        if (result && result.data && result.data.expense) {
+          dispatch(addExpense(result.data.expense));
+        } else {
+          dispatch(addExpense({ ...values, id: Date.now().toString() }));
+        }
+        
         toast.success('Expense added successfully');
         navigate('/expenses');
       } catch (err) {
         console.error('AddExpense error:', err);
-        toast.error('Saved locally (backend unavailable)');
-        dispatch(addExpense({ ...values, id: Date.now().toString() }));
-        navigate('/expenses');
       } finally {
         setSubmitting(false);
       }
@@ -149,7 +153,7 @@ const AddExpense = () => {
                 className={`w-full h-16 bg-surface-container clay-input-recessed rounded-xl pl-12 pr-10 text-body-md font-body-md text-on-surface outline-none border-none focus:ring-2 focus:ring-primary/20 appearance-none cursor-pointer ${formik.touched.paymentMethod && formik.errors.paymentMethod ? 'ring-2 ring-error/50' : ''}`}
               >
                 <option value="" disabled>Select method</option>
-                {PAYMENT_METHODS.map(m => <option key={m} value={m}>{m}</option>)}
+                {PAYMENT_METHODS.map(m => <option key={m} value={m}>{m.charAt(0).toUpperCase() + m.slice(1)}</option>)}
               </select>
               <span className="absolute right-4 material-symbols-outlined text-outline pointer-events-none">expand_more</span>
             </div>
