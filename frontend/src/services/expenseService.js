@@ -6,9 +6,15 @@ import { MOCK_EXPENSES } from '../utils/constants';
 export const getExpenses = async () => {
   try {
     const response = await axiosInstance.get('/expenses');
-    // response.data is { success: true, data: [...] }
-    const data = response.data?.data ?? response.data;
-    return { data: Array.isArray(data) ? data : MOCK_EXPENSES };
+    let expenses = response.data?.data?.expenses || [];
+    // Normalize data for frontend UI
+    expenses = expenses.map(exp => ({
+      ...exp,
+      id: exp._id,
+      category: exp.category?.name || exp.category,
+      notes: exp.description || exp.notes
+    }));
+    return { data: expenses };
   } catch (error) {
     console.warn('Backend unavailable, using mock data:', error.message);
     return { data: MOCK_EXPENSES };
@@ -17,13 +23,17 @@ export const getExpenses = async () => {
 
 // Add expense manually via standard route
 export const addExpense = async (data) => {
-  try {
-    const response = await axiosInstance.post('/expenses', data);
-    return response.data;
-  } catch (error) {
-    // Return a mock-successful response so the UI still works
-    return { success: true, data: { id: Date.now().toString(), ...data } };
+  const response = await axiosInstance.post('/expenses', data);
+  if (response.data?.data?.expense) {
+    const exp = response.data.data.expense;
+    response.data.data.expense = {
+      ...exp,
+      id: exp._id,
+      category: exp.category?.name || exp.category,
+      notes: exp.description || exp.notes
+    };
   }
+  return response.data;
 };
 
 // Alias used by ReceiptScanner and any component that prefers explicit naming
@@ -31,10 +41,19 @@ export const addExpenseApi = addExpense;
 
 // Parse raw SMS string and add expense via SMS route
 export const parseManualSMS = async (data) => {
-  const apiKey = import.meta.env.VITE_API_KEY || 'rakshit-raj-yadav-spendiq';
-  const response = await axiosInstance.post('/sms/receive', data, {
-    headers: { 'x-api-key': apiKey }
+  const response = await axiosInstance.post('/sms/parse', {
+    smsText: data.message,
+    autoSave: true
   });
+  if (response.data?.data?.expense) {
+    const exp = response.data.data.expense;
+    response.data.data.expense = {
+      ...exp,
+      id: exp._id,
+      category: exp.category?.name || exp.category,
+      notes: exp.description || exp.notes
+    };
+  }
   return response.data;
 };
 
