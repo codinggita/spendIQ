@@ -78,7 +78,7 @@ const Subscriptions = () => {
 
         {subscriptions.map((sub) => (
           <div 
-            key={sub.id} 
+            key={sub._id} 
             className="group bg-surface rounded-[32px] p-6 shadow-clay border border-white/50 relative overflow-hidden transition-all hover:translate-y-[-4px] hover:shadow-2xl"
           >
             {/* Background Icon Blob */}
@@ -90,7 +90,7 @@ const Subscriptions = () => {
                   <span className="material-symbols-outlined text-3xl">{sub.category === 'Streaming' ? 'movie' : 'bolt'}</span>
                 </div>
                 <button 
-                  onClick={() => handleDelete(sub.id)}
+                  onClick={() => handleDelete(sub._id)}
                   className="w-10 h-10 rounded-full flex items-center justify-center text-outline hover:text-error hover:bg-error/5 transition-colors"
                 >
                   <span className="material-symbols-outlined text-[20px]">delete</span>
