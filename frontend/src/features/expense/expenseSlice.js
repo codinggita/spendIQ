@@ -53,10 +53,9 @@ const expenseSlice = createSlice({
       .addCase(fetchExpenses.fulfilled, (state, action) => {
         state.loading = false;
         // Guard: only update if we received a valid array
-        if (Array.isArray(action.payload) && action.payload.length > 0) {
+        if (Array.isArray(action.payload)) {
           state.items = action.payload;
         }
-        // Otherwise keep existing items (mock data or previous fetch)
       })
       .addCase(fetchExpenses.rejected, (state, action) => {
         state.loading = false;
