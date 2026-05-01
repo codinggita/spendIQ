@@ -27,11 +27,15 @@ axiosInstance.interceptors.response.use(
       storage.remove('token');
       window.location.href = '/login';
     }
-    // Only show toast errors for non-GET requests (POST/PUT/DELETE)
-    // GET failures are handled silently with mock data fallback
     const method = error.config?.method?.toUpperCase();
     if (method && method !== 'GET') {
-      const message = error.response?.data?.message || 'Something went wrong. Try again.';
+      let message = error.response?.data?.message || 'Something went wrong. Try again.';
+      
+      // If the backend sends specific validation errors, display the first one so the user knows exactly what to fix
+      if (error.response?.data?.errors && error.response.data.errors.length > 0) {
+        message = error.response.data.errors[0];
+      }
+
       toast.error(message);
     }
     return Promise.reject(error);
