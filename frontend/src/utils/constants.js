@@ -1,5 +1,5 @@
-export const CATEGORIES = ['Food', 'Transport', 'Shopping', 'Utilities', 'Entertainment', 'Health', 'Other'];
-export const PAYMENT_METHODS = ['Cash', 'UPI', 'Credit Card', 'Debit Card', 'Net Banking'];
+export const CATEGORIES = ['Food & Dining', 'Transportation', 'Shopping', 'Bills & Utilities', 'Entertainment', 'Healthcare', 'Travel', 'Education', 'Other'];
+export const PAYMENT_METHODS = ['cash', 'card', 'upi', 'other'];
 
 export const MOCK_EXPENSES = [
   { id: '1', date: '2024-03-01', amount: 450, category: 'Food', paymentMethod: 'UPI', notes: 'Lunch' },
