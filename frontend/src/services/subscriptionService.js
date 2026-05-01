@@ -1,17 +1,18 @@
-/* eslint-disable no-unused-vars */
 import axiosInstance from './axiosInstance';
-import { MOCK_SUBSCRIPTIONS } from '../utils/constants';
 
 export const getSubscriptions = async () => {
-  // return axiosInstance.get('/subscriptions');
-  return new Promise((resolve) => {
-    setTimeout(() => resolve({ data: MOCK_SUBSCRIPTIONS }), 500);
-  });
+  const response = await axiosInstance.get('/subscriptions');
+  // Backend returns { success: true, data: [...] }
+  return { data: response.data.data };
 };
 
 export const addSubscription = async (data) => {
-  // return axiosInstance.post('/subscriptions', data);
-  return new Promise((resolve) => {
-    setTimeout(() => resolve({ data: { id: Date.now().toString(), ...data } }), 500);
-  });
+  const response = await axiosInstance.post('/subscriptions', data);
+  // Backend returns { success: true, data: { ... } }
+  return { data: response.data.data };
+};
+
+export const removeSubscriptionApi = async (id) => {
+  const response = await axiosInstance.delete(`/subscriptions/${id}`);
+  return response.data;
 };
