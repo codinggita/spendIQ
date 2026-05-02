@@ -1,8 +1,17 @@
 import { Outlet } from 'react-router-dom';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { fetchExpenses } from '../features/expense/expenseSlice';
 import Sidebar from '../components/layout/Sidebar';
 import Navbar from '../components/layout/Navbar';
 
 const Layout = () => {
+  const dispatch = useDispatch();
+
+  // Fetch expenses ONCE when the app shell loads — never re-fetch on page navigation
+  useEffect(() => {
+    dispatch(fetchExpenses());
+  }, [dispatch]);
   return (
     <div className="flex h-screen bg-surface overflow-hidden">
       <Sidebar />

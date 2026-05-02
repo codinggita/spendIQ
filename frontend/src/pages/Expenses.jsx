@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import SEO from '../components/SEO';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { useExpenseFilters } from '../hooks/useExpenseFilters';
-import { removeExpense, fetchExpenses } from '../features/expense/expenseSlice';
+import { removeExpense } from '../features/expense/expenseSlice';
 import { deleteExpense } from '../services/expenseService';
 import ManualSMSInput from '../components/ManualSMSInput';
 import { formatCurrency, formatDate } from '../utils/formatters';
@@ -43,9 +43,6 @@ const Expenses = () => {
   
   const { loading } = useSelector(state => state.expense);
 
-  useEffect(() => {
-    dispatch(fetchExpenses());
-  }, [dispatch]);
 
   const handleDelete = (id, e) => {
     e.stopPropagation();
