@@ -34,9 +34,16 @@ export const getExpenses = async () => {
       category: exp.category?.name || exp.category,
       notes: exp.description || exp.notes
     }));
-    // Also sync to localStorage so we have a local copy
-    writeLocalExpenses(expenses);
-    return { data: expenses };
+
+    if (expenses.length > 0) {
+      // Backend has real data — sync to localStorage and use it
+      writeLocalExpenses(expenses);
+      return { data: expenses };
+    } else {
+      // Backend returned empty (DB empty or not seeded) — use localStorage
+      console.info('Backend returned 0 expenses — loading from localStorage instead.');
+      return { data: readLocalExpenses() };
+    }
   } catch (error) {
     console.warn('Backend unavailable — loading from localStorage:', error.message);
     return { data: readLocalExpenses() };

@@ -48,9 +48,12 @@ const expenseSlice = createSlice({
       })
       .addCase(fetchExpenses.fulfilled, (state, action) => {
         state.loading = false;
-        if (Array.isArray(action.payload)) {
+        // Only replace the list if we got real data back.
+        // An empty result (backend offline/empty DB) must NOT wipe locally-added items.
+        if (Array.isArray(action.payload) && action.payload.length > 0) {
           state.items = action.payload;
         }
+        // If payload is empty but state is also empty, that's fine — nothing to show
       })
       .addCase(fetchExpenses.rejected, (state, action) => {
         state.loading = false;
