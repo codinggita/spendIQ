@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://spend-iq-mocha.vercel.app/sitemap.xml

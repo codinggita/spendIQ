@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import SEO from '../components/SEO';
 import { useSelector, useDispatch } from 'react-redux';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -88,6 +89,10 @@ const Budget = () => {
 
   return (
     <div className="flex-grow pb-xl">
+      <SEO 
+        title="Budget" 
+        description="Set and manage your monthly budgets. Stay on track with SpendIQ's smart budget planning and alerts." 
+      />
       <header className="mb-lg flex justify-between items-end">
           <div>
               <h1 className="font-headline-xl text-headline-xl text-on-surface mb-xs">Budgets &amp; Goals</h1>

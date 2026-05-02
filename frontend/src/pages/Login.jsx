@@ -8,6 +8,7 @@ import { loginStart, loginSuccess, loginFailure } from '../features/auth/authSli
 import { loginUser } from '../services/authService';
 import SpendIQLogo from '../assets/spendiq-logo.png';
 import MoneyStressSVG from '../assets/Money stress-pana.svg';
+import SEO from '../components/SEO';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -43,6 +44,10 @@ const Login = () => {
 
   return (
     <div className="bg-background min-h-screen flex items-center justify-center p-xl">
+      <SEO 
+        title="Login" 
+        description="Sign in to your SpendIQ account to manage your expenses, scan receipts, and monitor your financial health." 
+      />
       <div className="w-full max-w-[1280px] flex flex-col md:flex-row gap-[3rem] items-center justify-center">
         {/* Illustration Area (Left on Desktop) */}
         <div className="hidden md:flex flex-1 flex-col justify-center items-center p-xl max-w-[520px]">

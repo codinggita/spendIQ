@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import toast from 'react-hot-toast';
 import { registerUser } from '../services/authService';
 import SpendIQLogo from '../assets/spendiq-logo.png';
+import SEO from '../components/SEO';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -47,6 +48,10 @@ const Signup = () => {
 
   return (
     <div className="bg-background min-h-screen flex items-center justify-center p-xl">
+      <SEO 
+        title="Sign Up" 
+        description="Join SpendIQ today. Start tracking your expenses, manage your wealth securely, and achieve financial peace of mind." 
+      />
       <div className="w-full max-w-[1280px] flex flex-col md:flex-row gap-[3rem] items-center justify-center">
         {/* Illustration Area (Left on Desktop) */}
         <div className="hidden md:flex flex-1 flex-col justify-center items-center p-xl max-w-[500px]">

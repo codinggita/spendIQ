@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import SEO from '../components/SEO';
 
 const SUGGESTIONS = [
   "Summarize my spending this month",
@@ -42,6 +43,10 @@ const AIAssistant = () => {
 
   return (
     <div className="flex-grow pb-xl h-[calc(100vh-80px)] flex flex-col">
+      <SEO 
+        title="AI Assistant" 
+        description="Interact with SpendIQ AI to get smart financial insights, spending summaries, and budget optimization tips." 
+      />
         {/* Header Section */}
         <header className="flex flex-col md:flex-row md:items-end justify-between gap-md mb-md shrink-0">
             <div>

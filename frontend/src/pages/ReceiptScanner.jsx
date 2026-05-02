@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useRef } from 'react';
+import SEO from '../components/SEO';
 import { useDispatch } from 'react-redux';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
@@ -132,6 +133,10 @@ const ReceiptScanner = () => {
 
   return (
     <div className="flex-grow pb-10">
+      <SEO 
+        title="Receipt Scanner" 
+        description="Scan your physical receipts and let SpendIQ AI extract the merchant, amount, and category for you automatically." 
+      />
       {/* Hidden inputs linked to labels */}
       <input 
         id="file-upload" 
