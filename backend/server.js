@@ -1,4 +1,16 @@
 require('dotenv').config();
+
+// ✅ Validate critical environment variables at startup
+const requiredEnvVars = ['JWT_SECRET', 'MONGODB_URI'];
+requiredEnvVars.forEach(key => {
+  if (!process.env[key]) {
+    console.error(`❌ CRITICAL: Missing required environment variable: ${key}`);
+    console.error('Please set it in your Render Environment settings.');
+  } else {
+    console.log(`✅ ${key} is set`);
+  }
+});
+
 const app = require('./src/app');
 const connectDB = require('./src/config/database');
 
