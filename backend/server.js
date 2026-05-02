@@ -4,17 +4,16 @@ const connectDB = require('./src/config/database');
 
 const PORT = process.env.PORT || 5000;
 
-// Connect to Database
+// Start Server first so Render sees it as live
+const server = app.listen(PORT, () => {
+  console.log(`🚀 Server running in ${process.env.NODE_ENV || 'production'} mode on port ${PORT}`);
+});
+
+// Then connect to Database (non-blocking)
 connectDB();
 
-// Start Server
-const server = app.listen(PORT, () => {
-  console.log(`🚀 Server running in ${process.env.NODE_ENV} mode on port ${PORT}`);
+// Handle unhandled promise rejections - log but don't exit
+process.on('unhandledRejection', (err) => {
+  console.error(`⚠️ Unhandled Rejection: ${err.message}`);
 });
 
-// Handle unhandled promise rejections
-process.on('unhandledRejection', (err, promise) => {
-  console.error(`Error: ${err.message}`);
-  // Close server & exit process
-  server.close(() => process.exit(1));
-});
