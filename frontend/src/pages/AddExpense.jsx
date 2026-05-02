@@ -30,24 +30,25 @@ const AddExpense = () => {
     onSubmit: async (values, { setSubmitting }) => {
       try {
         const result = await addExpenseApi({
-          amount: values.amount,
+          amount: Number(values.amount),
           notes: values.notes,
           category: values.category,
           paymentMethod: values.paymentMethod,
           date: values.date,
+          type: 'expense',
         });
-        
-        // Use the real expense returned by the backend
-        if (result && result.data && result.data.expense) {
-          dispatch(addExpense(result.data.expense));
-        } else {
-          dispatch(addExpense({ ...values, id: Date.now().toString() }));
-        }
-        
-        toast.success('Expense added successfully');
+
+        // The service always returns a valid expense (real or localStorage)
+        const savedExpense = result?.data?.expense || {
+          ...values,
+          id: Date.now().toString(),
+        };
+        dispatch(addExpense(savedExpense));
+        toast.success('Expense saved successfully! 🎉');
         navigate('/expenses');
       } catch (err) {
         console.error('AddExpense error:', err);
+        toast.error('Could not save expense. Please try again.');
       } finally {
         setSubmitting(false);
       }

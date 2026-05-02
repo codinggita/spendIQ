@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { useExpenseFilters } from '../hooks/useExpenseFilters';
 import { removeExpense, fetchExpenses } from '../features/expense/expenseSlice';
+import { deleteExpense } from '../services/expenseService';
 import ManualSMSInput from '../components/ManualSMSInput';
 import { formatCurrency, formatDate } from '../utils/formatters';
 import { CATEGORIES, PAYMENT_METHODS } from '../utils/constants';
@@ -48,8 +49,9 @@ const Expenses = () => {
 
   const handleDelete = (id, e) => {
     e.stopPropagation();
-    dispatch(removeExpense(id));
-    toast.success("Expense removed");
+    dispatch(removeExpense(id));    // remove from Redux immediately
+    deleteExpense(id);              // remove from localStorage (async, fire-and-forget)
+    toast.success('Expense removed');
   };
 
   const totalThisMonth = filteredExpenses.reduce((acc, curr) => acc + curr.amount, 0);
