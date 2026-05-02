@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import SEO from '../components/SEO';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
@@ -57,6 +58,10 @@ const Expenses = () => {
 
   return (
     <div className="flex flex-col h-full pb-xl">
+      <SEO 
+        title="Expenses" 
+        description="Track your spending history, filter by categories, and manage your transactions with SpendIQ's intuitive interface." 
+      />
       {/* Page Header & Controls */}
       <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-lg mb-xl">
         <div>

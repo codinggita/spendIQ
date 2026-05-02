@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { fetchExpenses } from '../features/expense/expenseSlice';
 import { formatCurrency } from '../utils/formatters';
+import SEO from '../components/SEO';
 
 const COLORS = ['#00685f', '#6bd8cb', '#8b5cf6', '#f59e0b', '#ec4899', '#ef4444'];
 
@@ -79,6 +80,10 @@ const Dashboard = () => {
   // ──────────────────────────────────────────────────────────────────────────
   return (
     <div className="flex flex-col h-full pb-xl">
+      <SEO 
+        title="Dashboard" 
+        description="View your financial ecosystem at a glance. Track spending, savings, and get AI-powered insights on SpendIQ." 
+      />
       {/* Header */}
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-xl">
         <div>

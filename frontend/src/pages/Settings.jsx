@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import SEO from '../components/SEO';
 import toast from 'react-hot-toast';
 import { useAuth } from '../hooks/useAuth';
 import { useTheme } from '../hooks/useTheme';
@@ -58,6 +59,10 @@ const Settings = () => {
 
   return (
     <div className="flex-grow pb-xl">
+      <SEO 
+        title="Settings" 
+        description="Manage your SpendIQ account preferences, security settings, and appearance. Configure SMS sync and more." 
+      />
       <div className="max-w-4xl mx-auto space-y-xl">
         
         {/* Page Header with Illustration */}

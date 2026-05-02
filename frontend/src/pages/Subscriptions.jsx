@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import SEO from '../components/SEO';
 import ReactDOM from 'react-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { useFormik } from 'formik';
@@ -46,6 +47,10 @@ const Subscriptions = () => {
 
   return (
     <div className="flex-grow pb-10">
+      <SEO 
+        title="Subscriptions" 
+        description="Track and manage your recurring payments and subscriptions. Never miss a renewal with SpendIQ." 
+      />
       {/* Header */}
       <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-10">
         <div>
