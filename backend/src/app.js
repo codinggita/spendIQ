@@ -16,8 +16,21 @@ const app = express();
 
 // Security Middlewares
 app.use(helmet());
+
+// Support multiple comma-separated origins e.g. "https://myapp.vercel.app,http://localhost:5173"
+const allowedOrigins = (process.env.CORS_ORIGIN || 'http://localhost:5173')
+  .split(',')
+  .map(o => o.trim());
+
 app.use(cors({
-  origin: process.env.CORS_ORIGIN || 'http://localhost:5173',
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, Postman)
+    if (!origin) return callback(null, true);
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    return callback(new Error(`CORS blocked: ${origin} is not allowed`));
+  },
   credentials: true
 }));
 
