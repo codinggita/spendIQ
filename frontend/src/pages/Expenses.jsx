@@ -11,24 +11,22 @@ import { CATEGORIES, PAYMENT_METHODS } from '../utils/constants';
 
 // Define category to icon mapping for claymorphism UI
 const CATEGORY_ICONS = {
-  'Dining': 'restaurant',
-  'Groceries': 'shopping_cart',
+  'Food': 'restaurant',
   'Transport': 'local_gas_station',
-  'Entertainment': 'movie',
-  'Utilities': 'bolt',
-  'Health': 'medical_services',
   'Shopping': 'shopping_bag',
+  'Utilities': 'bolt',
+  'Entertainment': 'movie',
+  'Health': 'medical_services',
   'Other': 'payments'
 };
 
 const CATEGORY_COLORS = {
-  'Dining': 'bg-primary-container/20 text-primary',
-  'Groceries': 'bg-primary-container/20 text-primary',
+  'Food': 'bg-primary-container/20 text-primary',
   'Transport': 'bg-tertiary-container/20 text-tertiary',
-  'Entertainment': 'bg-secondary-container/30 text-on-secondary-container',
-  'Utilities': 'bg-error-container/20 text-error',
-  'Health': 'bg-tertiary-container/20 text-tertiary',
   'Shopping': 'bg-secondary-container/20 text-on-secondary-container',
+  'Utilities': 'bg-error-container/20 text-error',
+  'Entertainment': 'bg-secondary-container/30 text-on-secondary-container',
+  'Health': 'bg-tertiary-container/20 text-tertiary',
   'Other': 'bg-outline-variant/20 text-outline'
 };
 

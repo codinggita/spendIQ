@@ -7,9 +7,14 @@ exports.createExpense = async (req, res, next) => {
     const { amount, category, description, notes, merchant, date, type, paymentMethod } = req.body;
 
     // The frontend passes string "category", e.g., "Food & Dining". Find the categoryId.
-    const categoryDoc = await Category.findOne({ name: category });
+    let categoryDoc = await Category.findOne({ name: category });
+    
+    // Auto-create category if it doesn't exist to prevent "Invalid category" errors
     if (!categoryDoc) {
-      return ResponseHandler.badRequest(res, 'Invalid category name provided');
+      categoryDoc = await Category.create({
+        name: category,
+        isDefault: true
+      });
     }
     
     const categoryId = categoryDoc._id;

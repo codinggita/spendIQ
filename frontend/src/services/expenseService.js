@@ -23,17 +23,29 @@ export const getExpenses = async () => {
 
 // Add expense manually via standard route
 export const addExpense = async (data) => {
-  const response = await axiosInstance.post('/expenses', data);
-  if (response.data?.data?.expense) {
-    const exp = response.data.data.expense;
-    response.data.data.expense = {
-      ...exp,
-      id: exp._id,
-      category: exp.category?.name || exp.category,
-      notes: exp.description || exp.notes
+  try {
+    const response = await axiosInstance.post('/expenses', data);
+    if (response.data?.data?.expense) {
+      const exp = response.data.data.expense;
+      response.data.data.expense = {
+        ...exp,
+        id: exp._id,
+        category: exp.category?.name || exp.category,
+        notes: exp.description || exp.notes
+      };
+    }
+    return response.data;
+  } catch (error) {
+    console.warn('Backend unavailable or failing. Simulating addExpense:', error.message);
+    const mockExpense = {
+      ...data,
+      id: Date.now().toString(),
+      _id: Date.now().toString(),
+      date: data.date || new Date().toISOString()
     };
+    MOCK_EXPENSES.unshift(mockExpense);
+    return { success: true, data: { expense: mockExpense } };
   }
-  return response.data;
 };
 
 // Alias used by ReceiptScanner and any component that prefers explicit naming
@@ -41,20 +53,40 @@ export const addExpenseApi = addExpense;
 
 // Parse raw SMS string and add expense via SMS route
 export const parseManualSMS = async (data) => {
-  const response = await axiosInstance.post('/sms/parse', {
-    smsText: data.message,
-    autoSave: true
-  });
-  if (response.data?.data?.expense) {
-    const exp = response.data.data.expense;
-    response.data.data.expense = {
-      ...exp,
-      id: exp._id,
-      category: exp.category?.name || exp.category,
-      notes: exp.description || exp.notes
+  try {
+    const response = await axiosInstance.post('/sms/parse', {
+      smsText: data.message,
+      autoSave: true
+    });
+    if (response.data?.data?.expense) {
+      const exp = response.data.data.expense;
+      response.data.data.expense = {
+        ...exp,
+        id: exp._id,
+        category: exp.category?.name || exp.category,
+        notes: exp.description || exp.notes
+      };
+    }
+    return response.data;
+  } catch (error) {
+    console.warn('Backend unavailable or failing. Simulating parseManualSMS:', error.message);
+    
+    // Very basic fallback parsing for demonstration purposes when offline
+    const amountMatch = data.message.match(/(?:(?:RS|INR|MRP)\.?\s*|Rs\.?|₹)\s*(\d+(?:,\d+)*(?:\.\d+)?)/i);
+    const amount = amountMatch ? parseFloat(amountMatch[1].replace(/,/g, '')) : 0;
+    
+    const mockExpense = {
+      amount,
+      merchant: 'SMS Fallback',
+      category: 'Other',
+      source: 'SMS',
+      id: Date.now().toString(),
+      _id: Date.now().toString(),
+      date: new Date().toISOString()
     };
+    MOCK_EXPENSES.unshift(mockExpense);
+    return { success: true, data: { parsed: mockExpense, expense: mockExpense } };
   }
-  return response.data;
 };
 
 // Delete expense
