@@ -1,22 +1,15 @@
-import React, { useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React from 'react';
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { fetchExpenses } from '../features/expense/expenseSlice';
 import { formatCurrency } from '../utils/formatters';
 import SEO from '../components/SEO';
 
 const COLORS = ['#00685f', '#6bd8cb', '#8b5cf6', '#f59e0b', '#ec4899', '#ef4444'];
 
 const Dashboard = () => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
   const { items: expenseItems } = useSelector((state) => state.expense);
   const expenses = Array.isArray(expenseItems) ? expenseItems : [];
-
-  useEffect(() => {
-    dispatch(fetchExpenses());
-  }, [dispatch]);
-
   // Financial Stats
   const totalBalance = 125000; // Still mock, usually from a bank sync or settings
   const totalMonthlySpending = expenses.reduce((acc, curr) => acc + (curr.amount || 0), 0);

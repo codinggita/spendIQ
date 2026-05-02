@@ -75,14 +75,13 @@ const Budget = () => {
 
   const getCategoryIcon = (category) => {
     const icons = {
-      'Food & Dining': 'restaurant',
-      'Shopping': 'shopping_cart',
-      'Transportation': 'directions_car',
+      'Food': 'restaurant',
+      'Transport': 'local_gas_station',
+      'Shopping': 'shopping_bag',
+      'Utilities': 'bolt',
       'Entertainment': 'movie',
-      'Bills & Utilities': 'receipt_long',
-      'Health & Fitness': 'fitness_center',
-      'Travel': 'flight_takeoff',
-      'Other': 'category'
+      'Health': 'medical_services',
+      'Other': 'payments'
     };
     return icons[category] || 'category';
   };

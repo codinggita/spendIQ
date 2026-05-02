@@ -76,20 +76,20 @@ export function extractMerchant(text) {
 
 // ─── Category Mapping ────────────────────────────────────────────────────────
 const MERCHANT_CATEGORY_MAP = {
-  Swiggy: 'Food & Dining',
-  Zomato: 'Food & Dining',
-  "Domino's": 'Food & Dining',
-  "McDonald's": 'Food & Dining',
-  KFC: 'Food & Dining',
-  'Pizza Hut': 'Food & Dining',
-  Starbucks: 'Food & Dining',
-  BigBasket: 'Food & Dining',
-  Blinkit: 'Food & Dining',
-  Dunzo: 'Food & Dining',
-  'D-Mart': 'Food & Dining',
-  'Reliance Fresh': 'Food & Dining',
-  Uber: 'Transportation',
-  Ola: 'Transportation',
+  Swiggy: 'Food',
+  Zomato: 'Food',
+  "Domino's": 'Food',
+  "McDonald's": 'Food',
+  KFC: 'Food',
+  'Pizza Hut': 'Food',
+  Starbucks: 'Food',
+  BigBasket: 'Food',
+  Blinkit: 'Food',
+  Dunzo: 'Food',
+  'D-Mart': 'Food',
+  'Reliance Fresh': 'Food',
+  Uber: 'Transport',
+  Ola: 'Transport',
   Amazon: 'Shopping',
   Flipkart: 'Shopping',
   Myntra: 'Shopping',
@@ -98,12 +98,12 @@ const MERCHANT_CATEGORY_MAP = {
 };
 
 const KEYWORD_CATEGORY_MAP = [
-  { keywords: ['restaurant', 'cafe', 'food', 'dining', 'eat', 'meal', 'pizza', 'burger', 'snack', 'coffee', 'chai'], category: 'Food & Dining' },
-  { keywords: ['cab', 'taxi', 'ride', 'fuel', 'petrol', 'diesel', 'transport', 'bus', 'metro', 'train', 'flight', 'uber', 'ola'], category: 'Transportation' },
+  { keywords: ['restaurant', 'cafe', 'food', 'dining', 'eat', 'meal', 'pizza', 'burger', 'snack', 'coffee', 'chai'], category: 'Food' },
+  { keywords: ['cab', 'taxi', 'ride', 'fuel', 'petrol', 'diesel', 'transport', 'bus', 'metro', 'train', 'flight', 'uber', 'ola'], category: 'Transport' },
   { keywords: ['shopping', 'mall', 'store', 'mart', 'supermarket', 'clothing', 'fashion', 'shoes', 'apparel'], category: 'Shopping' },
-  { keywords: ['electricity', 'water', 'gas', 'utility', 'internet', 'broadband', 'bill', 'recharge', 'telecom'], category: 'Bills & Utilities' },
+  { keywords: ['electricity', 'water', 'gas', 'utility', 'internet', 'broadband', 'bill', 'recharge', 'telecom'], category: 'Utilities' },
   { keywords: ['movie', 'cinema', 'netflix', 'spotify', 'game', 'entertainment', 'concert', 'event'], category: 'Entertainment' },
-  { keywords: ['hospital', 'pharmacy', 'medicine', 'doctor', 'clinic', 'health', 'medical', 'dental'], category: 'Healthcare' },
+  { keywords: ['hospital', 'pharmacy', 'medicine', 'doctor', 'clinic', 'health', 'medical', 'dental'], category: 'Health' },
 ];
 
 export function extractCategory(merchant, text) {

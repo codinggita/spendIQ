@@ -114,18 +114,22 @@ const ReceiptScanner = () => {
     const payload = {
       amount: parseFloat(form.amount),
       merchant: form.merchant,
-      category: form.category,
-      source: 'Receipt',
+      category: form.category || 'Other',
+      notes: form.notes || '',
+      type: 'expense',
       date: new Date().toISOString().split('T')[0]
     };
 
     try {
-      await addExpenseApi(payload);
-      toast.success('Receipt saved successfully!');
+      const result = await addExpenseApi(payload);
+      // Dispatch to Redux so list updates instantly (works offline too)
+      const savedExpense = result?.data?.expense || { ...payload, id: Date.now().toString() };
+      dispatch(addExpense(savedExpense));
+      toast.success('Receipt expense saved! 🎉');
       navigate('/expenses');
     } catch (err) {
-      // Error toast is handled by axiosInstance globally
       console.error('Failed to save receipt:', err);
+      toast.error('Could not save. Please try again.');
     } finally {
       setSaving(false);
     }

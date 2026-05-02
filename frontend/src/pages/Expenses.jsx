@@ -1,34 +1,33 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import SEO from '../components/SEO';
 import { useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import toast from 'react-hot-toast';
 import { useExpenseFilters } from '../hooks/useExpenseFilters';
-import { removeExpense, fetchExpenses } from '../features/expense/expenseSlice';
+import { removeExpense } from '../features/expense/expenseSlice';
+import { deleteExpense } from '../services/expenseService';
 import ManualSMSInput from '../components/ManualSMSInput';
 import { formatCurrency, formatDate } from '../utils/formatters';
 import { CATEGORIES, PAYMENT_METHODS } from '../utils/constants';
 
 // Define category to icon mapping for claymorphism UI
 const CATEGORY_ICONS = {
-  'Dining': 'restaurant',
-  'Groceries': 'shopping_cart',
+  'Food': 'restaurant',
   'Transport': 'local_gas_station',
-  'Entertainment': 'movie',
-  'Utilities': 'bolt',
-  'Health': 'medical_services',
   'Shopping': 'shopping_bag',
+  'Utilities': 'bolt',
+  'Entertainment': 'movie',
+  'Health': 'medical_services',
   'Other': 'payments'
 };
 
 const CATEGORY_COLORS = {
-  'Dining': 'bg-primary-container/20 text-primary',
-  'Groceries': 'bg-primary-container/20 text-primary',
+  'Food': 'bg-primary-container/20 text-primary',
   'Transport': 'bg-tertiary-container/20 text-tertiary',
-  'Entertainment': 'bg-secondary-container/30 text-on-secondary-container',
-  'Utilities': 'bg-error-container/20 text-error',
-  'Health': 'bg-tertiary-container/20 text-tertiary',
   'Shopping': 'bg-secondary-container/20 text-on-secondary-container',
+  'Utilities': 'bg-error-container/20 text-error',
+  'Entertainment': 'bg-secondary-container/30 text-on-secondary-container',
+  'Health': 'bg-tertiary-container/20 text-tertiary',
   'Other': 'bg-outline-variant/20 text-outline'
 };
 
@@ -44,14 +43,12 @@ const Expenses = () => {
   
   const { loading } = useSelector(state => state.expense);
 
-  useEffect(() => {
-    dispatch(fetchExpenses());
-  }, [dispatch]);
 
   const handleDelete = (id, e) => {
     e.stopPropagation();
-    dispatch(removeExpense(id));
-    toast.success("Expense removed");
+    dispatch(removeExpense(id));    // remove from Redux immediately
+    deleteExpense(id);              // remove from localStorage (async, fire-and-forget)
+    toast.success('Expense removed');
   };
 
   const totalThisMonth = filteredExpenses.reduce((acc, curr) => acc + curr.amount, 0);

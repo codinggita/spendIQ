@@ -2,6 +2,14 @@
 
 > A privacy-first web app that transforms scattered financial data into clear insights, budgets, and smarter spending decisions.
 
+## 🔗 Quick Links
+* **🎨 Figma Design:** [View Figma](https://www.figma.com/design/6RNPZiKmftmzds1lE6YfvV/Untitled?node-id=57-68&t=zb0WoftbEUdwGyeZ-1)
+* **🌐 Live Project:** [View Live Site](https://spend-iq-mocha.vercel.app/)
+* **📖 API Documentation:** [View Postman Docs](https://documenter.getpostman.com/view/54114750/2sBXqKnzVq)
+* **⚙️ Backend Deployment:** [View Backend](https://spendiq-2.onrender.com/)
+* **🎥 Demo Video:** [Watch on YouTube](https://youtu.be/inq6ND00ly0)
+
+---
 ---
 
 ## 📌 Problem Statement
